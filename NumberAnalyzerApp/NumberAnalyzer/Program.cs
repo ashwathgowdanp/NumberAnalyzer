@@ -1,19 +1,25 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 bool bContinue = true;
+String? UserAnswer = null;
+bool IsSameUser = false;
+string UserName = null;
 
 do
 {
-    Console.WriteLine("Please enter your Name:");
-    string? UserName = Console.ReadLine();
-    if (String.IsNullOrEmpty(UserName) || String.IsNullOrWhiteSpace(UserName) || UserName.Any(c => char.IsDigit(c)))
+    if (!IsSameUser)
     {
-        Console.WriteLine("Please enter a valid Name: Would you like to try again ? Say 'y' or 'n' ");
-        String? UserAnswer = Console.ReadLine();
-        if (UserAnswer.ToLower() == "n")
-            break;
-        else
-            continue;
+        Console.WriteLine("Please enter your Name:");
+        UserName = Console.ReadLine();
+        if (String.IsNullOrEmpty(UserName) || String.IsNullOrWhiteSpace(UserName) || UserName.Any(c => char.IsDigit(c)))
+        {
+            Console.WriteLine("Please enter a valid Name: Would you like to try again ? Say 'y' or 'n' ");
+            UserAnswer = Console.ReadLine();
+            if (UserAnswer.ToLower() == "n")
+                break;
+            else
+                continue;
+        }
     }
     Console.WriteLine($"Hi {UserName} - Please enter enter an integer between 1 and 100 ( inclusive of 1 and 100 )");
     string? Number = Console.ReadLine();
@@ -84,7 +90,11 @@ do
         if (userVal != null)
         {
             if (userVal.ToLower() == "y")
+            {
                 bContinue = true;
+                IsSameUser = true;
+
+            }
             else
                 bContinue = false;
         }
